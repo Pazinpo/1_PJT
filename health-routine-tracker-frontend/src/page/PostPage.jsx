@@ -4,22 +4,21 @@ import AppLayout from "../component/layout/AppLayout";
 import PostForm from "../component/post/PostForm";
 import PostList from "../component/post/PostList";
 import usePosts from "../hooks/usePosts";
+import "../styles/post.css";
 
 export default function PostPage() {
-  const { items, loading, error, addPost } = usePosts();
+  const { items, loading, addPost } = usePosts();
 
   return (
     <AppLayout>
-      <h1 className="page-title">게시글 작성</h1>
+      <h2 className="page-title">새로운 게시글</h2>
 
-      <PostForm
-        onSubmit={async (values) => {
-          await addPost(values); // 제목/내용 전달
-        }}
-      />
+      <PostForm onSubmit={addPost} />
 
-      {error && <p className="error-text">에러가 발생했습니다. 잠시 후 다시 시도해주세요.</p>}
-      <PostList items={items} loading={loading} />
+      <section className="section">
+        <h3 className="section__title">최근 게시글</h3>
+        <PostList items={items} loading={loading} />
+      </section>
     </AppLayout>
   );
 }

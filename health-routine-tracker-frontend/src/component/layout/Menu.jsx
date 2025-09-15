@@ -3,13 +3,18 @@ import React from "react";
 
 export default function Menu() {
   return (
-    <header className="app-header">
-      <div className="logo">✔ Health Routine Tracker</div>
-      <nav className="menu">
-        <a href="#home">홈</a>
-        <a href="#post">글쓰기</a>
-        <a href="#login">로그인</a>
-      </nav>
+    <header className="menu">
+      <div className="menu__left">
+        <button className="btn-back" onClick={() => window.history.back()}>
+          &lt;
+        </button>
+        <h1 className="brand">
+          <span className="brand__check">✔</span> Health Routine Tracker
+        </h1>
+      </div>
+      <div className="menu__right">
+        {/* 필요하면 우측 액션 버튼들 배치 */}
+      </div>
     </header>
   );
 }

@@ -1,34 +1,36 @@
 // src/api/posts.js
-import { api } from "./client";
+// 임시 로컬스토리지 기반 API (백엔드 없이 동작)
+// 나중에 진짜 서버 붙일 때 이 파일만 fetch/axios로 교체하면 됩니다.
 
-// 실제 API가 없을 때를 대비한 경로 예시:
-// GET  /posts
-// POST /posts { title, body }
+const STORAGE_KEY = "posts_v1";
 
-export async function fetchPosts() {
-  // 서버가 없으면 빈 배열 반환(try/catch는 usePosts에서 처리)
+function readAll() {
   try {
-    return await api("/posts");
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
   } catch {
     return [];
   }
 }
+function writeAll(items) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+}
+
+export async function fetchPosts() {
+  // 실전에서는: const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/posts`);
+  // return await res.json();
+  return Promise.resolve(readAll());
+}
 
 export async function createPost(payload) {
-  try {
-    const created = await api("/posts", { json: payload });
-    // created 가 객체라고 가정. 없으면 로컬에서 최소 형태 생성
-    return created ?? {
-      id: Date.now(),
-      ...payload,
-      createdAt: Date.now(),
-    };
-  } catch {
-    // 실패시에도 최소한의 객체 반환(낙관적 UI 유지)
-    return {
-      id: Date.now(),
-      ...payload,
-      createdAt: Date.now(),
-    };
-  }
+  const now = Date.now();
+  const item = {
+    id: now,
+    createdAt: new Date(now).toISOString(),
+    ...payload,
+  };
+  const all = readAll();
+  all.unshift(item); // 최신이 위로
+  writeAll(all);
+  return Promise.resolve(item);
 }
