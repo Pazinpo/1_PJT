@@ -15,7 +15,7 @@ spring:
   jackson:
     time-zone: Asia/Seoul
   security:
-     user:
+    user:
       name: user             # ← dev용 아이디
       password: pass1234     # ← dev용 비번
 server:
@@ -37,4 +37,9 @@ springdoc:
     enabled: true
   swagger-ui:
     path: /swagger-ui.html
+
+
+jwt: 
+    secret: change-this-to-256bit-secret-key-please
+    access-token-exp-seconds: 3600   # 1시간
 

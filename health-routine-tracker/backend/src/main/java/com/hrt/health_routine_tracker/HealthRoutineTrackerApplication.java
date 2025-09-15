@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @OpenAPIDefinition(
         info = @Info(title = "Health Routine Tracker API", version = "v1", description = "Health Routine Tracker 백엔드 API 문서"),
         servers = {
-                @Server(url = "/", description = "base path resolved by context-path")
+                @Server(url = "/v1", description = "base path resolved by context-path")
         }
 )
 public class HealthRoutineTrackerApplication {

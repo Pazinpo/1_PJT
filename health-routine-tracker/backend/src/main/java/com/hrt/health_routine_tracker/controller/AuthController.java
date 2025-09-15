@@ -1,5 +1,7 @@
 package com.hrt.health_routine_tracker.controller;
 
+import com.hrt.health_routine_tracker.security.JwtTokenProvider;
+
 import com.hrt.health_routine_tracker.domain.User;
 import com.hrt.health_routine_tracker.dto.ApiResponse;
 import com.hrt.health_routine_tracker.dto.User.LoginReq;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Tag(name = "Auth", description = "회원가입/로그인 API")
 public class AuthController {
+    private final JwtTokenProvider jwtTokenProvider;
 
     private final UserService userService;
 
@@ -38,7 +41,7 @@ public class AuthController {
     @Operation(summary = "로그인", description = "임시 토큰 mock-<userId> 반환")
     public ApiResponse<LoginRes> login(@RequestBody @Valid LoginReq req) {
         User u = userService.login(req.getEmail(), req.getPassword());
-        String token = "mock-" + u.getId();
+        String token = jwtTokenProvider.generateAccessToken(u.getId(), java.util.List.of("ROLE_USER"));
         LoginRes res = new LoginRes(token, new UserRes(
                 u.getId(), u.getEmail(), u.getUsername(), u.getNickname(), u.getCreatedAt()
         ));

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service @RequiredArgsConstructor
 public class UserService {
+    private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
     @Transactional
@@ -20,13 +21,16 @@ public class UserService {
             throw new BusinessException(ErrorCode.USER_DUPLICATE, "Email exists");
         if (userRepository.existsByNickname(req.getNickname()))
             throw new BusinessException(ErrorCode.USER_DUPLICATE, "Nickname exists");
+        
+        String encoded = passwordEncoder.encode(req.getPassword());
 
         // 데모: 평문 저장 (실서비스는 반드시 BCRYPT 등 사용)
         User user = User.builder()
                 .email(req.getEmail())
                 .username(req.getUsername())
                 .nickname(req.getNickname())
-                .passwordHash(req.getPassword())
+                //.passwordHash(req.getPassword())
+                .passwordHash(encoded)  
                 .build();
         return userRepository.save(user);
     }
@@ -40,10 +44,9 @@ public class UserService {
     public User login(String email, String password) {
         User u = userRepository.findByEmail(email)
                 .orElseThrow(() -> new BusinessException(ErrorCode.AUTH_REQUIRED, "invalid credentials"));
-        if (!u.getPasswordHash().equals(password)) {
+        if (!passwordEncoder.matches(password, u.getPasswordHash())) {
             throw new BusinessException(ErrorCode.AUTH_REQUIRED, "invalid credentials");
         }
         return u;
     }
 }
-
