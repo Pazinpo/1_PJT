@@ -26,7 +26,7 @@
 // src/App.js
 import React from "react";
 import "./App.css";
-import DetailsPage from "./component/page/DetailsPage"; 
+import DetailsPage from "./page/DetailsPage"; 
 // ↑ 경로 주의: src 기준이므로 ./component/page/DetailsPage 가 맞습니다.
 
 function App() {
