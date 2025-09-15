@@ -82,29 +82,35 @@ const Submit = styled.button`
 
 
 const SignUpPage = () => {
-    const [email, setEmail] = useState("");
-    const [passwd, setPasswd] = useState("");
-    const [nickname, setNickname] = useState("");
-    const [username, setUsername] = useState("");
+  // 상태(state) 선언 - 각 입력값을 관리
+  const [email, setEmail] = useState(""); // 이메일
+  const [passwd, setPasswd] = useState(""); // 비밀번호
+  const [nickname, setNickname] = useState(""); // 닉네임
+  const [username, setUsername] = useState(""); // 유저이름
 
-    const moveUrl = useNavigate();
+  // 페이지 이동용 함수 (react-router-dom의 useNavigate 훅)
+  const moveUrl = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        alert("회원가입 성공")
-        moveUrl("/login");
-    };
+  // 폼 제출 시 실행되는 함수
+  const handleSubmit = (e) => {
+    e.preventDefault(); // 기본 폼 제출 막기 (새로고침 방지)
+    alert("회원가입 성공"); // 알림창 띄우기
+    moveUrl("/login"); // 회원가입 후 로그인 페이지로 이동
+  };
 
-    return (
+  return (
     <PageWrap>
+      {/* 상단 바 */}
       <TopBar>
         <Logo src="/logo.png" alt="HRT" />
         <Bar />
       </TopBar>
 
+      {/* 회원가입 폼 */}
       <Panel as="form" onSubmit={handleSubmit}>
         <Title>회원가입</Title>
 
+        {/* 이메일 입력 */}
         <Input
           type="email"
           placeholder="example@xx.com"
@@ -112,6 +118,8 @@ const SignUpPage = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+
+        {/* 비밀번호 입력 */}
         <Input
           type="password"
           placeholder="password"
@@ -119,6 +127,8 @@ const SignUpPage = () => {
           onChange={(e) => setPasswd(e.target.value)}
           required
         />
+
+        {/* 닉네임 입력 */}
         <Input
           type="text"
           placeholder="nickname"
@@ -126,6 +136,8 @@ const SignUpPage = () => {
           onChange={(e) => setNickname(e.target.value)}
           required
         />
+
+        {/* 유저이름 입력 */}
         <Input
           type="text"
           placeholder="username"
@@ -134,10 +146,11 @@ const SignUpPage = () => {
           required
         />
 
+        {/* 제출 버튼 */}
         <Submit type="submit">회원 가입</Submit>
       </Panel>
     </PageWrap>
   );
-}
+};
 
 export default SignUpPage;

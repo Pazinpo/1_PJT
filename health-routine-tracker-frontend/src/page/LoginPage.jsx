@@ -95,28 +95,40 @@ const Logo = styled.img`
 `;
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [passwd, setPasswd] = useState("");
+  // 상태(state) 선언 - 입력값 관리
+  const [email, setEmail] = useState(""); // 이메일
+  const [passwd, setPasswd] = useState(""); // 비밀번호
+
+  // 페이지 이동용 함수 (react-router-dom의 useNavigate 훅)
   const moveUrl = useNavigate();
 
+  // 로그인 버튼 클릭 시 실행되는 함수
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // 기본 이벤트 막기 (새로고침 방지)
+
+    // 이메일 또는 비밀번호가 비어있을 때 경고
     if (!email || !passwd) {
       alert("이메일과 비밀번호를 입력하세요.");
       return;
     }
 
+    // 로그인 성공 처리
     alert("로그인 성공! ");
-    moveUrl("/blog");
+    moveUrl("/blog"); // 블로그 페이지로 이동
   };
 
   return (
     <Container>
+      {/* 상단 로고 */}
       <Header>
         <Logo src="/logo.png" alt="HRT 로고" />
       </Header>
+
+      {/* 로그인 폼 영역 */}
       <FormWrapper>
         <Title>로그인</Title>
+
+        {/* 이메일 입력 */}
         <Input
           type="email"
           placeholder="이메일"
@@ -124,6 +136,8 @@ const LoginPage = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+
+        {/* 비밀번호 입력 */}
         <Input
           type="password"
           placeholder="비밀번호"
@@ -131,10 +145,15 @@ const LoginPage = () => {
           onChange={(e) => setPasswd(e.target.value)}
           required
         />
+
+        {/* 로그인 버튼 */}
         <Button type="button" onClick={handleSubmit}>
           로그인
         </Button>
+
         <Divider />
+
+        {/* 하단 링크 (아이디/비밀번호 찾기, 회원가입) */}
         <LinkRow>
           <TextLink>아이디 찾기</TextLink>
           <TextLink>비밀번호 찾기</TextLink>
