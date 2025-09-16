@@ -4,11 +4,13 @@ import SignUpPage from "./page/SignUpPage";
 import LoginPage from "./page/LoginPage"; // 네가 만든 로그인 페이지 경로
 import PostPage from "./page/PostPage";
 import DetailsPage from "./page/DetailsPage"; 
+import MainPage from "./page/MainPage";
 
 
 export default function App() {
   return (
     <Routes>
+      <Route path="/" element={<MainPage />} />
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
@@ -23,7 +25,6 @@ export default function App() {
       <Route path="/post" element={<PostPage />} />
       <Route path="/detail" element={<DetailsPage />} />
     </Routes>
-
 
   );
 }
