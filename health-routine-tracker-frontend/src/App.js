@@ -1,10 +1,12 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import LoginPage from "./page/LoginPage";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SignUpPage from "./page/SignUpPage";
+import LoginPage from "./page/LoginPage"; // 네가 만든 로그인 페이지 경로
+
 
 export default function App() {
   return (
+
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<LoginPage />} />
@@ -18,5 +20,7 @@ export default function App() {
         element={<div style={{ padding: 24 }}>404 Not Found</div>}
       />
     </Routes>
+
+
   );
 }

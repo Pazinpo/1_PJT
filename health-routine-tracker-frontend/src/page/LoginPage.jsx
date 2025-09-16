@@ -119,6 +119,7 @@ const LoginPage = () => {
 
   return (
     <Container>
+
       {/* 상단 로고 */}
       <Header>
         <Logo src="/logo.png" alt="HRT 로고" />
@@ -136,6 +137,7 @@ const LoginPage = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+
 
         {/* 비밀번호 입력 */}
         <Input
