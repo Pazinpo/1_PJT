@@ -16,7 +16,7 @@ const HeaderComponent = ({ title }) => {
   };
 
   return (
-    <div className="container d-flex align-items-center justify-content-between">
+    <div className="d-flex align-items-center justify-content-between">
       <div className="d-flex align-items-center gap-5">
         <img
           src="/static/logo.png"

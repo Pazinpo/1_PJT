@@ -1,12 +1,13 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Routes, Route, Navigate } from "react-router-dom";
 import SignUpPage from "./page/SignUpPage";
 import LoginPage from "./page/LoginPage"; // 네가 만든 로그인 페이지 경로
 import PostPage from "./page/PostPage";
-import DetailsPage from "./page/DetailsPage"; 
+import DetailsPage from "./page/DetailsPage";
 import MainPage from "./page/MainPage";
 import MyRoutinePage from "./page/MyRoutinePage";
-
 
 export default function App() {
   return (
@@ -27,6 +28,5 @@ export default function App() {
       <Route path="/detail" element={<DetailsPage />} />
       <Route path="/mypage/myroutine" element={<MyRoutinePage />} />
     </Routes>
-
   );
 }

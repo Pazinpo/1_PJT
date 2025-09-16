@@ -26,9 +26,9 @@ const MyRoutinePage = () => {
   ];
 
   return (
-    <div>
+    <div className="container">
       <HeaderComponent title="My Routine" />
-      <div className="d-flex container">
+      <div className="d-flex">
         <MenuComponent />
         <div className="m-0 p-0 w-100">
           <div>

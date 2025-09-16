@@ -29,9 +29,9 @@ const MainPage = () => {
   ];
 
   return (
-    <div>
+    <div className="container d-flex flex-column w-100 ">
       <HeaderComponent />
-      <div className="d-flex container">
+      <div className="d-flex">
         <MenuComponent />
         <div className="m-0 p-0 w-100">
           {users.map((user) => {
