@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import RoutineComponent from "../component/RoutineComponent";
+import MenuComponent from "../component/MenuComponent";
+import HeaderComponent from "../component/HeaderComponent";
 
 const MainPage = () => {
   const navigation = useNavigate();
-  const homeHandler = () => {
-    navigation("/");
-  };
 
   // dummy data
   const users = [
@@ -31,12 +30,10 @@ const MainPage = () => {
 
   return (
     <div>
-      <div className="container d-flex align-items-center">
-        <img src="/static/logo.png" alt="HRT" onClick={homeHandler} />
-        <p>메인페이지</p>
-      </div>
+      <HeaderComponent />
       <div className="d-flex container">
-        <div className="w-25 border-end me-3">메뉴창</div>
+        {/* <div className="w-25 border-end me-3">메뉴창</div> */}
+        <MenuComponent />
         <div className="m-0 p-0 w-100">
           {users.map((user) => {
             return <RoutineComponent user={user} />;
