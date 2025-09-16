@@ -11,9 +11,3 @@ html, body {
   font-family: 'Noto Sans KR', sans-serif;
   background: var(--bg);
 }
-
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
