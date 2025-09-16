@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SignUpPage from "./page/SignUpPage";
 import LoginPage from "./page/LoginPage"; // 네가 만든 로그인 페이지 경로
+import PostPage from "./page/PostPage";
 
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
         path="*"
         element={<div style={{ padding: 24 }}>404 Not Found</div>}
       />
+      <Route path="/post" element={<PostPage />} />
     </Routes>
 
 
