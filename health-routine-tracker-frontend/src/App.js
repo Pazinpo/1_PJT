@@ -1,41 +1,29 @@
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-// src/App.js
 import React from "react";
-import "./App.css";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import SignUpPage from "./page/SignUpPage";
+import LoginPage from "./page/LoginPage"; // 네가 만든 로그인 페이지 경로
+import PostPage from "./page/PostPage";
 import DetailsPage from "./page/DetailsPage"; 
-// ↑ 경로 주의: src 기준이므로 ./component/page/DetailsPage 가 맞습니다.
 
-function App() {
+
+export default function App() {
   return (
-    <div className="App">
-      <DetailsPage />
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
+      <Route
+        path="/blog"
+        element={<div style={{ padding: 24 }}>블로그 페이지 (임시)</div>}
+      />
+      <Route
+        path="*"
+        element={<div style={{ padding: 24 }}>404 Not Found</div>}
+      />
+      <Route path="/post" element={<PostPage />} />
+      <Route path="/detail" element={<DetailsPage />} />
+    </Routes>
+
+
   );
 }
-
-export default App;
-
