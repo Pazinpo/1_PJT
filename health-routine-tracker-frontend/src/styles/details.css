@@ -74,3 +74,8 @@ body{ margin:0; background:var(--bg); color:var(--ink);
   border:1px solid var(--border-dim); border-radius:50%; background:#fff;
   cursor:pointer; user-select:none;
 }
+.dp-logo-img{
+  height:160px;      
+  width:auto;
+  display:block;
+}
