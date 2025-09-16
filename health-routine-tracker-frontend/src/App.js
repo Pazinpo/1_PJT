@@ -5,6 +5,7 @@ import LoginPage from "./page/LoginPage"; // 네가 만든 로그인 페이지 �
 import PostPage from "./page/PostPage";
 import DetailsPage from "./page/DetailsPage"; 
 import MainPage from "./page/MainPage";
+import MyRoutinePage from "./page/MyRoutinePage";
 
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
       />
       <Route path="/post" element={<PostPage />} />
       <Route path="/detail" element={<DetailsPage />} />
+      <Route path="/mypage/myroutine" element={<MyRoutinePage />} />
     </Routes>
 
   );
