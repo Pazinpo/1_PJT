@@ -17,7 +17,7 @@ const HeaderComponent = ({ title }) => {
 
   return (
     <div className="d-flex align-items-center justify-content-between">
-      <div className="d-flex align-items-center gap-5">
+      <div className="d-flex align-items-center gap-3">
         <img
           src="/static/logo.png"
           alt="HRT"
@@ -25,7 +25,7 @@ const HeaderComponent = ({ title }) => {
           className="header-main"
         />
         {title ? (
-          <div className="fs-1 fst-italic text-dark-emphasis ps-3">{title}</div>
+          <div className="fs-2 fst-italic text-dark-emphasis">{title}</div>
         ) : (
           <div></div>
         )}
