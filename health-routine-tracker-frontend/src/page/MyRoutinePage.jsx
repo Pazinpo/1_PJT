@@ -1,11 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import RoutineComponent from "../component/RoutineComponent";
-import MenuComponent from "../component/MenuComponent";
 import HeaderComponent from "../component/HeaderComponent";
+import MenuComponent from "../component/MenuComponent";
+import RoutineComponent from "../component/RoutineComponent";
 
-const MainPage = () => {
-  const navigation = useNavigate();
-
+const MyRoutinePage = () => {
   // dummy data
   const users = [
     {
@@ -30,17 +27,19 @@ const MainPage = () => {
 
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent title="My Routine" />
       <div className="d-flex container">
         <MenuComponent />
         <div className="m-0 p-0 w-100">
-          {users.map((user) => {
-            return <RoutineComponent user={user} />;
-          })}
+          <div>
+            {users.map((user) => {
+              return <RoutineComponent user={user} />;
+            })}
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default MainPage;
+export default MyRoutinePage;
