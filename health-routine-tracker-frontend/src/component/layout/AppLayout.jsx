@@ -2,10 +2,10 @@
 import React from "react";
 import Menu from "./Menu";
 
-export default function AppLayout({ children }) {
+export default function AppLayout({ children, header = null }) {
   return (
     <div className="app">
-      <Menu />
+      {header ?? <Menu />}
       <main className="container">{children}</main>
     </div>
   );

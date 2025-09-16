@@ -9,7 +9,7 @@ export default function Menu() {
           &lt;
         </button>
         <h1 className="brand">
-          <span className="brand__check">✔</span> Health Routine Tracker
+          <img src="/logo.png" alt="Health Routine Tracker" className="dp-logo-img" />
         </h1>
       </div>
       <div className="menu__right">

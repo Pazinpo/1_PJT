@@ -63,3 +63,8 @@ textarea { resize: vertical; }
 .post-item__meta .dot { width: 4px; height: 4px; border-radius: 50%; background: #aaa; display: inline-block; }
 .post-item__row { margin-top: 6px; }
 .post-item__caption { margin-top: 8px; white-space: pre-wrap; }
+.dp-logo-img {
+  height: 60px;   /* 원하는 크기로 조정 */
+  width: auto;
+  display: block;
+}
