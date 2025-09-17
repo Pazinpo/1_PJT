@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import api from "../api/axios"; // 백엔드 붙일 때 사용
+import api from "../api/axios"; 
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -12,8 +12,8 @@ export default function LoginPage() {
     if (!email || !passwd) return alert("이메일/비밀번호를 입력하세요.");
 
     // // 백엔드 연결 시
-    // const res = await api.post("/auth/login", { email, password: passwd });
-    // localStorage.setItem("accessToken", res.data.token);
+    const res = await api.post("/auth/login", { email, password: passwd });
+    localStorage.setItem("accessToken", res.data.token);
 
     alert("로그인 성공!(UI 테스트)");
     navigate("/blog");
