@@ -29,7 +29,7 @@ const MainPage = () => {
   ];
 
   return (
-    <div className="container d-flex flex-column w-100 ">
+    <div className="container d-flex flex-column">
       <HeaderComponent />
       <div className="d-flex">
         <MenuComponent />
