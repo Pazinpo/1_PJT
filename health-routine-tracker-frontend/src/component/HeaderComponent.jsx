@@ -9,7 +9,7 @@ const HeaderComponent = ({ title }) => {
     navigation("/");
   };
   const loginHandler = () => {
-    navigation("");
+    navigation("/login");
   };
   const logoutHandler = () => {
     navigation("/");
