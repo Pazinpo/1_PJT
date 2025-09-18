@@ -4,7 +4,7 @@
 - JDK 17 필요
 - 로컬 실행: `./gradlew bootRun` (Windows: `gradlew.bat bootRun`)
 - 패키징: `./gradlew bootJar`
-- 기본 URL: `http://localhost:8080/v1`
+- 기본 URL: `http://localhost:8081/v1`
 
 ## 문서
 - Swagger UI: `/v1/swagger-ui.html`
@@ -17,6 +17,15 @@
 - Routine Comments: `POST /routines/{routineId}/comments`, `GET /routines/{routineId}/comments`
 - Comments(레거시): `PATCH /api/comments/{id}`, `DELETE /api/comments/{id}`
 - Routine Likes: `POST /routines/{routineId}/like`, `GET /routines/{routineId}/likes`, `GET /routines/{routineId}/like/me`
+- AI Insight: `POST /ai/insight` (요청: `{ avgSleep, exerciseDays, avgWater, exerciseType }`, 응답: text/plain)
+
+## AI 설정(선택)
+- 환경변수
+  - `AI_ENABLED=true`
+  - `OPENAI_API_KEY=sk-...`
+  - `OPENAI_MODEL=gpt-3.5-turbo` (기본값)
+  - `OPENAI_TIMEOUT_MS=10000` (기본값)
+- 키/비활성 시 응답: "AI가 아직 비활성화되어 있습니다. 키 설정 후 사용해 주세요."
 
 ## 에러 규약
 - ApiResponse: `{ success, data, message, code, details }`
@@ -27,5 +36,5 @@
 - 스키마 파일: 프로젝트 루트 `Health_Routine_Tracker.sql`
 
 ## CORS
-- 개발 기본: `http://localhost:3000`, `http://127.0.0.1:3000`
-- 배포 도메인은 `WebConfig`의 `${cors.allowed-origins}`(환경변수로 주입 가능) 사용
+- 개발 기본: `http://localhost:5173`, `http://127.0.0.1:5173`
+- 배포 도메인은 `application.yml`의 `cors.allowed-origins` 사용(환경변수로 주입 가능)
