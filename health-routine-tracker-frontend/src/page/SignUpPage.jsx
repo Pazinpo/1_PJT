@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";    
+import { api } from "../api/axios";
 
 /* ================= styles ================= */
 
@@ -88,15 +89,29 @@ const SignUpPage = () => {
   const [nickname, setNickname] = useState(""); // 닉네임
   const [username, setUsername] = useState(""); // 유저이름
 
-  // 페이지 이동용 함수 (react-router-dom의 useNavigate 훅)
-  const moveUrl = useNavigate();
+   const moveUrl = useNavigate();
 
-  // 폼 제출 시 실행되는 함수
-  const handleSubmit = (e) => {
-    e.preventDefault(); // 기본 폼 제출 막기 (새로고침 방지)
-    alert("회원가입 성공"); // 알림창 띄우기
-    moveUrl("/login"); // 회원가입 후 로그인 페이지로 이동
-  };
+   const handleSubmit = async (e) => {
+     e.preventDefault();
+
+     try {
+       // 회원가입 요청 (백엔드 명세에 맞춰 body 작성)
+       const res = await api.post("/v1/auth/register", {
+         email: email.trim(),
+         password: passwd, // 서버는 password 키 요구
+         nickname,
+         username,
+       });
+
+       if (res.status === 200 || res.status === 201) {
+         alert("회원가입 성공!");
+         moveUrl("/login"); // 성공 시 로그인 페이지로 이동
+       }
+     } catch (err) {
+       console.error("[회원가입 에러]", err);
+       alert("회원가입 실패. 입력값을 확인하거나 다시 시도하세요.");
+     }
+   };
 
   return (
     <PageWrap>
