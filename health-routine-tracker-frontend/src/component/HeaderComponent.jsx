@@ -1,10 +1,13 @@
 import "../css/menu.css";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore, useUserStore } from "../stores/useAuthStore";
 
 const HeaderComponent = ({ title }) => {
-  const [user, setUser] = useState(null);
+  const user = useUserStore((state) => state.user);
+  const resetUser = useUserStore((state) => state.reset);
+  const resetAuth = useAuthStore((state) => state.reset);
   const navigation = useNavigate();
+
   const homeHandler = () => {
     navigation("/");
   };
@@ -12,6 +15,10 @@ const HeaderComponent = ({ title }) => {
     navigation("/login");
   };
   const logoutHandler = () => {
+    // ✅ 두 store 모두 초기화
+    resetUser();
+    resetAuth();
+    localStorage.clear();
     navigation("/");
   };
 
@@ -24,15 +31,11 @@ const HeaderComponent = ({ title }) => {
           onClick={homeHandler}
           className="header-main"
         />
-        {title ? (
-          <div className="fs-2 fst-italic text-dark-emphasis">{title}</div>
-        ) : (
-          <div></div>
-        )}
+        {title ? <div className="fs-2 fst-italic">{title}</div> : <div></div>}
       </div>
       {user ? (
         <div className=" d-flex align-items-center gap-3">
-          <div>user 님, 환영합니다!</div>
+          <div>{user.nickname} 님, 환영합니다!</div>
           <button
             type="button"
             onClick={logoutHandler}

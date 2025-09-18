@@ -4,34 +4,26 @@ import HeaderComponent from "../component/HeaderComponent";
 import { useEffect, useState } from "react";
 import Spinner from "../component/common/Spinner";
 import { fetchRoutines } from "../hooks/useRoutine";
+import { useUserStore } from "../stores/useAuthStore";
+import { Link, useNavigate } from "react-router-dom";
 
 const MainPage = () => {
+  const user = useUserStore((state) => state.user);
+
   // ✅ 게시글
   const [routines, setRoutines] = useState([]);
   // ✅ 로딩 상태
   const [isLoading, setIsLoading] = useState(false);
+  // ✅ navigation
+  const navigation = useNavigate();
 
-  // ✅ 더미데이터 -> 나중에 삭제 !!
-  const dummy = [
-    {
-      nickname: "민재",
-      sleepingTime: "07:23:23",
-      water: "1200",
-      exercise: "Gym",
-    },
-    {
-      nickname: "성우",
-      sleepingTime: "04:23:21",
-      water: "1800",
-      exercise: "Running",
-    },
-    {
-      nickname: "수연",
-      sleepingTime: "03:00:21",
-      water: "800",
-      exercise: null,
-    },
-  ];
+  const btnHandler = () => {
+    navigation("/post");
+  };
+
+  const routineHandler = (id) => {
+    navigation(`/detail/${id}`);
+  };
 
   useEffect(() => {
     // 언마운트 레이스 가드
@@ -39,10 +31,11 @@ const MainPage = () => {
     (async () => {
       setIsLoading(true);
       try {
-        const data = await fetchRoutines();
-        if (mounted) setRoutines(Array.isArray(data) ? data : dummy);
+        const data = await fetchRoutines(user);
+        console.log(">>>>> ", data);
+        if (mounted) setRoutines(Array.isArray(data) ? data : []);
       } catch (e) {
-        if (mounted) setRoutines(dummy);
+        if (mounted) setRoutines([]);
       } finally {
         if (mounted) setIsLoading(false);
       }
@@ -62,13 +55,25 @@ const MainPage = () => {
             <Spinner />
           ) : routines.length > 0 ? (
             routines.map((routine, idx) => (
-              <RoutineComponent
-                key={routine.id ?? routine.nickname ?? idx}
-                routine={routine}
-              />
+              // link 데코 없애기
+              <Link to={`/detail/${routine.id}`}>
+                <RoutineComponent
+                  key={routine.id ?? routine.nickname ?? idx}
+                  routine={routine}
+                />
+              </Link>
             ))
           ) : (
-            <p className="text-center py-4">게시글이 없습니다.</p>
+            <div className="d-flex flex-column align-items-center">
+              <p className="text-center py-4">게시글이 없습니다.</p>
+              <button
+                type="button"
+                className="btn btn-outline-success"
+                onClick={btnHandler}
+              >
+                루틴 작성하러 가기
+              </button>
+            </div>
           )}
         </div>
       </div>

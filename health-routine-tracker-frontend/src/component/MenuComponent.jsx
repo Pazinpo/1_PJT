@@ -11,7 +11,7 @@ const MenuComponent = () => {
   // mypage 버튼 클릭 핸들러
   // todo : url 연결 필요
   const myPageHandler = () => {
-    navigate("/mypage/myroutine");
+    navigate("/mypage");
   };
   // create routine 버튼 클릭 핸들러
   // todo : url 연결 필요

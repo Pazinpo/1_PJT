@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../api/axios"; // BASE_URL = http://localhost:8080
+import { api, instance } from "../api/axios"; // BASE_URL = http://localhost:8080
+import { useAuthStore, useUserStore } from "../stores/useAuthStore";
 
 export default function LoginPage() {
+  const { setAccessToken } = useAuthStore.getState();
+  const { setUser } = useUserStore.getState();
+  const user = useUserStore((state) => state.user);
+
   const [email, setEmail] = useState("");
   const [passwd, setPasswd] = useState(""); // 변수명은 passwd 유지
   const [loading, setLoading] = useState(false);
@@ -22,11 +27,11 @@ export default function LoginPage() {
       setLoading(true);
 
       // BASE_URL이 http://localhost:8080 이므로 /v1 포함해서 호출
-      const res = await api.post(
-        "/v1/auth/login",
-        { email: email.trim(), password: passwd },
+      const res = await instance.post(
+        "/auth/login",
+        { email: email.trim(), password: passwd }
         // 혹시 기본 Authorization 헤더가 세팅돼 있다면 제거
-        { headers: { Authorization: undefined } }
+        // { headers: { Authorization: undefined } }
       );
 
       // ✅ 백엔드가 바디로 토큰을 주는 경우만 신뢰 (CORS상 헤더는 읽지 않음)
@@ -38,6 +43,7 @@ export default function LoginPage() {
         res.data?.data?.token ??
         res.data?.data?.accessToken ??
         "";
+      console.log("[login response data] >>>>> ", res);
 
       if (!token) {
         // 응답 구조 확인용 로그 (개발 중에만)
@@ -48,10 +54,14 @@ export default function LoginPage() {
         return;
       }
 
-      localStorage.setItem("accessToken", token);
+      // localStorage.setItem("accessToken", token);
+      setAccessToken(token);
+      setUser(res.data.data.user);
+      console.log("user ", user);
 
       alert("로그인 성공!");
-      navigate("/"); 
+      console.log("user ", user);
+      navigate("/");
     } catch (error) {
       const status = error?.response?.status;
       const msg =

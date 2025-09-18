@@ -4,6 +4,7 @@ import StatsSwitcher from "../component/mypage/StatsSwitcher";
 import StatsChart from "../component/mypage/StatsChart";
 import Header from "../component/layout/Header";
 import "../styles/mypage.css";
+import HeaderComponent from "../component/HeaderComponent";
 
 // 날짜 포맷
 const fmtDate = (d) => {
@@ -17,8 +18,8 @@ const fmtDate = (d) => {
 // 주(월~일)
 const getWeekRange = (d) => {
   const date = new Date(d);
-  const day = date.getDay();                 // 0=일 ~ 6=토
-  const diffToMonday = (day + 6) % 7;        // 월=0
+  const day = date.getDay(); // 0=일 ~ 6=토
+  const diffToMonday = (day + 6) % 7; // 월=0
   const monday = new Date(date);
   monday.setDate(date.getDate() - diffToMonday);
   const sunday = new Date(monday);
@@ -54,10 +55,10 @@ export default function MyPage() {
   return (
     <div className="container py-3">
       {/* 로고 */}
-      <Header />
+      <HeaderComponent title="MyPage" />
 
       {/* 🔹 마이페이지 + 로그아웃 같은 줄 */}
-      <div className="d-flex align-items-center justify-content-between mb-4">
+      {/* <div className="d-flex align-items-center justify-content-between mb-4">
         <h2 className="mb-0">마이페이지</h2>
         <button
           className="btn btn-outline-danger btn-sm"
@@ -65,7 +66,7 @@ export default function MyPage() {
         >
           Logout
         </button>
-      </div>
+      </div> */}
 
       <div className="row g-4 align-items-stretch">
         {/* LEFT: 달력 */}
@@ -78,7 +79,9 @@ export default function MyPage() {
               onMonthChange={(m) => setActiveMonth(m)}
             />
             <div className="mt-3 small text-muted">
-              {`선택한 날짜: ${fmtDate(selectedDate)} / 표시 중인 월: ${fmtMonth(activeMonth)}`}
+              {`선택한 날짜: ${fmtDate(
+                selectedDate
+              )} / 표시 중인 월: ${fmtMonth(activeMonth)}`}
             </div>
           </div>
         </div>

@@ -11,28 +11,6 @@ const MyRoutinePage = () => {
   // ✅ 로딩 상태
   const [isLoading, setIsLoading] = useState(false);
 
-  // ✅ 더미데이터 -> 나중에 삭제 !!
-  const dummy = [
-    {
-      nickname: "민재",
-      sleepingTime: "07:23:23",
-      water: "1200",
-      exercise: "Gym",
-    },
-    {
-      nickname: "성우",
-      sleepingTime: "04:23:21",
-      water: "1800",
-      exercise: "Running",
-    },
-    {
-      nickname: "수연",
-      sleepingTime: "03:00:21",
-      water: "800",
-      exercise: null,
-    },
-  ];
-
   useEffect(() => {
     // 언마운트 레이스 가드
     let mounted = true;
@@ -40,9 +18,9 @@ const MyRoutinePage = () => {
       setIsLoading(true);
       try {
         const data = await fetchRoutines();
-        if (mounted) setRoutines(Array.isArray(data) ? data : dummy);
+        if (mounted) setRoutines(Array.isArray(data) ? data : []);
       } catch (e) {
-        if (mounted) setRoutines(dummy);
+        if (mounted) setRoutines([]);
       } finally {
         if (mounted) setIsLoading(false);
       }

@@ -1,33 +1,18 @@
 // src/component/hooks/usePosts.js
-import { useEffect, useState } from "react";
-import { fetchPosts, createPost } from "../api/posts";
+import { api } from "../api/axios";
 
-export default function usePosts() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // 최초 로드
-  useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-        const data = await fetchPosts();
-        setItems(data);
-      } catch (e) {
-        setError(e);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
-
-  // 새 글 추가
-  const addPost = async (payload) => {
-    const created = await createPost(payload);
-    setItems((prev) => [created, ...prev]);
-    return created;
-  };
-
-  return { items, loading, error, addPost };
-}
+export const createPosts = async (routine) => {
+  try {
+    const response = await api.post("/routines", routine);
+    if (response.status === 201) {
+      console.log(response);
+      return response.status;
+    } else if (response.status === 409) {
+      console.log("usePosts response status : ", response.status);
+      return response.status;
+    }
+  } catch (error) {
+    console.log("usePosts error : ", error);
+    return error.status;
+  }
+};
