@@ -1,0 +1,16 @@
+.menu {
+  cursor: pointer;
+  color: lightslategray;
+  transition: color 0.5s, text-decoration-color 0.5s,
+    text-decoration-thickness 0.5s;
+}
+
+.menu:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  color: darkslategrey;
+}
+
+.header-main:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,10 @@
+.routine {
+  box-shadow: 0 1px 3px rgb(0 0 0 / 50%);
+  border-radius: 10px;
+  transition: box-shadow 0.25s;
+}
+
+.routine:hover {
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 75%);
+}

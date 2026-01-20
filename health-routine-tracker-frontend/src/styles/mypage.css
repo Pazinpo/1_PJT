@@ -1,0 +1,61 @@
+/* ===== 공통: 두 패널 높이 동일로 늘어나게 ===== */
+.calendar-panel,
+.stats-panel { height: 100%; }
+
+/* ===== 달력 크게 & 박스 안에서 여백 줄이기 ===== */
+.calendar-panel .react-calendar { width: 100%; font-size: 1.3rem; }
+.calendar-panel .react-calendar__tile { padding: 1.6rem 0 !important; }
+
+/* 달력 자체 테두리 감추고 카드와 자연스럽게 연결 */
+.calendar-only { border: none !important; background: transparent !important; }
+
+/* 데스크톱에서 달력 카드의 최소 높이 (통계와 균형) */
+@media (min-width: 992px) {
+  .calendar-panel {
+    max-width: 740px;
+    min-height: 760px;            /* 필요에 따라 700~820px 조절 */
+    display: flex; flex-direction: column; justify-content: flex-start;
+  }
+}
+
+/* ===== 통계(세로 차트) ===== */
+.charts-vertical {
+  display: flex; flex-direction: column;
+  justify-content: space-between; gap: 12px;
+}
+
+/* 도넛 기본 크기 제한 (StatsChart 각 도넛 래퍼에 className="doughnut-wrap" 사용) */
+.charts-vertical .doughnut-wrap,
+.stats-panel .doughnut-wrap { width: 140px; height: 140px; margin: 0 auto; }
+
+@media (max-width: 576px) {
+  .charts-vertical .doughnut-wrap,
+  .stats-panel .doughnut-wrap { width: 120px; height: 120px; }
+}
+.app-header {
+  border-bottom: none !important;
+}
+/* Header: 구분선 제거 */
+.app-header { border-bottom: none !important; }
+
+/* 달력 크게 */
+.calendar-panel .react-calendar { width: 100%; font-size: 1.3rem; }
+.calendar-panel .react-calendar__tile { padding: 1.6rem 0 !important; }
+
+/* 데스크톱에서 달력 카드의 최소 높이 (통계와 균형) */
+@media (min-width: 992px) {
+  .calendar-panel {
+    min-height: 760px;
+    display: flex; flex-direction: column;
+  }
+}
+
+/* 통계(세로 차트) 정렬 */
+.charts-vertical {
+  display: flex; flex-direction: column;
+  justify-content: space-between; gap: 12px;
+}
+
+/* 도넛 크기 제한: StatsChart 각 도넛 래퍼에 doughnut-wrap 클래스가 있다면 적용 */
+.charts-vertical .doughnut-wrap,
+.stats-panel .doughnut-wrap { width: 140px; height: 140px; margin: 0 auto; }
